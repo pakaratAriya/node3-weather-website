@@ -8,10 +8,17 @@ const forecast = (latitude, longitude, callbacks) => {
         }else if(body.error){
             callbacks('Please insert your location again', undefined)        
         }else{
-            callbacks(undefined, body.daily.data[0].summary + " It is currently " + ((body.currently.temperature-32)/9*5) + " degrees out. There is a "
-                     + body.currently.precipProbability + "% chance of rain.")
+            console.log(body)
+            callbacks(undefined, body.daily.data[0].summary + " It is currently " + parseFloat(convertTemp(body.currently.temperature)).toFixed(2) + " degrees out. There is a "
+                     + body.currently.precipProbability + "% chance of rain.\n" +
+                     "The highest: " + parseFloat(convertTemp(body.daily.data[0].temperatureHigh)).toFixed(2) + ".\n" +
+                     "The lowest: " + parseFloat(convertTemp(body.daily.data[0].temperatureLow)).toFixed(2))
         }
     })
+}
+
+const convertTemp = (t) =>{
+    return (t-32)/9*5
 }
 
 module.exports = forecast;
