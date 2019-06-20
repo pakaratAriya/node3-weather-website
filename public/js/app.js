@@ -1,15 +1,3 @@
-
-fetch('/weather?address=!').then((response)=>{
-    response.json().then((data)=>{
-        if(data.err){
-            console.log(data.err)
-        }else{
-            console.log("location: " + data.location + "\nforecast: " + data.forecast)
-        }
-
-    })
-})
-
 const weatherForm = document.querySelector('form')
 const search = document.querySelector('input')
 const messageOne = document.querySelector("#message-1")
